@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Sawaed Shabab Masr">
+    <meta name="description" content="Official website for Sawaed Shabab Masr Initiative">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سواعد شباب مصر - وزارة الشباب والرياضة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #C80000;
+            --gold: #ffcc00;
+            --light-gold: #f1c40f;
+            --dark-bg: #1a2a3b;
+            --secondary-dark: #2f3135;
+            --white: #ffffff;
+            --light-gray: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: url("-1_orig.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            color: var(--white);
+            line-height: 1.6;
+            direction: rtl;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--white);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-red);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-left: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        
+        .mobile-menu-btn {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--white);
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-btn:hover {
+            color: var(--gold);
+        }
+        
+        /* القائمة الجانبية */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            padding: 80px 20px 30px;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            z-index: 2000;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .side-menu.active {
+            right: 0;
+        }
+        
+        .side-menu .menu-header {
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .side-menu .menu-header h2 {
+            color: var(--gold);
+            font-size: 24px;
+        }
+        
+        .menu-section {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-section-title {
+            padding: 15px 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .menu-section-title:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .menu-section-title i {
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-section-title.active i {
+            transform: rotate(180deg);
+        }
+        
+        .menu-subitems {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background-color: rgba(50, 50, 50, 0.3);
+        }
+        
+        .menu-subitems.active {
+            max-height: 500px;
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            color: #e0e0e0;
+            font-size: 16px;
+            display: block;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--gold);
+            border-left: 3px solid var(--gold);
+        }
+        
+        .province-coordinators {
+            padding-left: 20px;
+        }
+        
+        .coordinator-item {
+            padding: 10px 15px;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+        }
+        
+        .coordinator-item:last-child {
+            border-bottom: none;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            transition: var(--transition);
+        }
+        
+        .close-menu:hover {
+            color: var(--gold);
+        }
+        
+        /* Coordinators submenu scroll with hidden scrollbar */
+        #coordinators {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+            scrollbar-width: none; /* Firefox */
+        }
+        #coordinators::-webkit-scrollbar {
+            width: 0px;
+            background: transparent; /* Chrome/Safari/Webkit */
+        }
+        
+        /* Welcome Section */
+        .welcome {
+            text-align: center;
+            margin-top: 120px;
+            padding: 60px 20px;
+        }
+        
+        .welcome h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .welcome h1 span {
+            color: var(--gold);
+        }
+        
+        .welcome p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--light-gray);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--dark-bg);
+            border: 2px solid var(--gold);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+        
+        .section-title p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+        }
+        
+        /* Vision & Mission */
+        .vision-mission {
+            background-color: var(--secondary-dark);
+        }
+        
+        .vm-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .vm-card {
+            background: linear-gradient(145deg, var(--primary-red), var(--secondary-dark));
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .vm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .vm-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .vm-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        /* Activities */
+        .activities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .activity-card {
+            background-color: var(--secondary-dark);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .activity-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .activity-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .activity-card:hover .activity-img img {
+            transform: scale(1.05);
+        }
+        
+        .activity-content {
+            padding: 20px;
+        }
+        
+        .activity-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+        
+        .activity-content p {
+            color: var(--light-gray);
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: var(--gold);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            color: var(--light-gold);
+        }
+        
+        .read-more i {
+            margin-right: 5px;
+        }
+        
+        /* Provinces */
+        .provinces {
+            background-color: var(--secondary-dark);
+        }
+        
+        .provinces-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .province-card {
+            background: linear-gradient(145deg, var(--dark-bg), var(--secondary-dark));
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .province-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .province-card h3 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .province-card p {
+            color: var(--light-gray);
+        }
+        
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 1.2rem;
+            color: var(--dark-bg);
+        }
+        
+        .contact-details h4 {
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .contact-form {
+            background: linear-gradient(145deg, var(--dark-bg), var(--secondary-dark));
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light-gray);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-dark);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo p {
+            color: var(--light-gray);
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--gold);
+            color: var(--dark-bg);
+        }
+        
+        .footer-links h3,
+        .footer-newsletter h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: var(--light-gray);
+            transition: var(--transition);
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--gold);
+            padding-right: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+        }
+        
+        /* Support */
+        .support {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .support img {
+            margin-top: 20px;
+            height: 70px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        @keyframes slideUp {
+            from {transform: translateY(40px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+        
+        .fade-in {
+            animation: fadeIn 2s ease;
+        }
+        
+        .slide-up {
+            animation: slideUp 2.5s ease;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .welcome h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .welcome h1 {
+                font-size: 2.2rem;
+            }
+            
+            .welcome p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+         
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .side-menu {
+                width: 280px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo img {
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .welcome h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .vm-card, .activity-card, .province-card {
+                padding: 20px;
+            }
+        }
+        
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: var(--gold);
+            color: var(--dark-bg);
+            padding: 8px 15px;
+            font-weight: 600;
+            z-index: 1001;
+            transition: var(--transition);
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 80px 0;
+        }
+        
+        .gallery-grid {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .gallery-grid img {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="WhatsApp Image 2025-09-06 at 00.14.35.png" alt="شعار كيان سواعد شباب مصر">
+                <span class="logo-text">كيان سواعد شباب مصر</span>
+            </div>
+            
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <span class="close-menu" onclick="toggleMenu()">
+            <i class="fas fa-times"></i>
+        </span>
+        
+        <div class="menu-header">
+            <h2>هيكل الكيان</h2>
+        </div>
+        
+        <!-- Founder Section -->
+        <div class="menu-section">
+            <div class="menu-section-title" onclick="toggleSubmenu('founder')">
+                <span>المؤسس</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="menu-subitems" id="founder">
+                <a href="#" class="menu-item">أ. كريم السيسي - المؤسس والرئيس</a>
+                
+                <!-- Deputy Founders -->
+                <div class="menu-section-title" onclick="toggleSubmenu('deputies')">
+                    <span>نائب الرئيس</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="menu-subitems" id="deputies">
+                    <a href="#" class="menu-item">أ. اسلام ابراهيم   - نائب الرئيس </a>
+                    <a href="#" class="menu-item">أ. أية مصطفي  - نائب الرئيس </a>
+                    
+                     
+                 
+                </div>
+            </div>
+        </div>
+        
+        <!-- Coordinators Section -->
+        <div class="menu-section">
+            <div class="menu-section-title" onclick="toggleSubmenu('coordinators')">
+                <span>المنسقين</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="menu-subitems" id="coordinators">
+                <!-- Provinces with Coordinators -->
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">القاهرة</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. اللاء السيد بكر
+                        </div>
+                        <div class="coordinator-item">
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">الإسكندرية</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. كريم السيبي 
+                        </div>
+                        <div class="coordinator-item">
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">الجيزة</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. محمد دياب 
+                        </div>
+                        <div class="coordinator-item">
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">الدقهلية</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. اميرة عبد العاطي 
+                        </div>
+                        <div class="coordinator-item">
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">القليوبية</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. حسام نصر 
+                        </div>
+                        <div class="coordinator-item">
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">بورسعيد</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. هنا زاد 
+                        </div>
+                        <div class="coordinator-item">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">الشرقية</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. رحمة سيف  
+                        </div>
+                        <div class="coordinator-item">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-item province-coordinators">
+                    <div class="province-name">المنوفية</div>
+                    <div class="coordinator-list">
+                        <div class="coordinator-item">
+                            <span>المنسق:</span> أ. ولاء القشان  
+                        </div>
+                        <div class="coordinator-item">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- President's Decisions Section -->
+        <div class="menu-section">
+            <div class="menu-section-title" onclick="toggleSubmenu('decisions')">
+                <span>اللجان </span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="menu-subitems" id="decisions">
+                <a href="#" class="menu-item">أ. فهمي طه محمد  -  رئيس لجنة العلاقات العامة </a>
+                      <a href="#" class="menu-item">أ. مروه بدر   -  رئيس لجنة المتطوعين </a>
+                       <a href="#" class="menu-item">أ. ايمان روق   - رئيس لجة الاعلام  </a>
+                        <a href="#" class="menu-item">أ. ميروز    - رئيس لجة التدريب والتثقيف  </a>
+            </div>
+        </div>
+        
+        <!-- Main Navigation Links -->
+        <div class="menu-section">
+            <a href="#home" class="menu-item" onclick="toggleMenu()">الرئيسية</a>
+            <a href="#about" class="menu-item" onclick="toggleMenu()">عن الكيان</a>
+            <a href="#activities" class="menu-item" onclick="toggleMenu()">الأنشطة</a>
+            <a href="#ai" class="menu-item" onclick="toggleMenu()">الذكاء الاصطناعي</a>
+            <a href="#contact" class="menu-item" onclick="toggleMenu()">تواصل معنا</a>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section id="home" class="welcome">
+        <div class="container">
+            <h1 class="fade-in">أهلاً بكم في كيان<br> <span>سواعد شباب مصر</span></h1>
+            <p class="slide-up">معاً نحو مستقبل أفضل للشباب المصري، تاريخ، ثقافة، وإنجازات.</p>
+            <a href="#about" class="btn btn-primary">اكتشف المزيد</a>
+        </div>
+    </section>
+    
+    <!-- Vision & Mission Section -->
+    <section id="about" class="vision-mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>رؤيتنا ورسالتنا</h2>
+                <p>نسعى لتمكين الشباب المصري وبناء مستقبل مشرق للوطن</p>
+            </div>
+            
+            <div class="vm-container">
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>رؤيتنا</h3>
+                    <p>بناء كوادر شبابية فاعلة وقادرة على الإسهام في تنمية المجتمع، وتحقيق مستهدفات رؤية مصر 2030.</p>
+                </div>
+                
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>تعريف الكيان</h3>
+                    <p>سواعد شباب مصر كيان شبابي يعمل تحت إشراف وزارة الشباب والرياضة، وعضو بالجمعية العمومية للاتحاد المصري للكيانات الشبابية، يسعى لتمكين الشباب وصناعة قيادات مؤثرة في خدمة المجتمع.</p>
+                </div>
+                
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>الرسالة</h3>
+                    <p>يسعى فريق سواعد شباب مصر لتمكين الشباب عبر تدريبات وبرامج ومبادرات تنموية، مع تعزيز التواصل مع المؤسسات المجتمعية وتنمية مهارات القيادة لدى الشباب.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Activities Section -->
+      <section id="activities" class="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>أنشطتنا وبرامجنا</h2>
+                <p>برامج متنوعة تلبي احتياجات الشباب في مختلف المجالات</p>
+            </div>
+            
+            <div class="activities-container">
+                <div class="activity-card" data-modal="activity1">
+                    <div class="activity-img">
+                        <img src="WhatsApp Image 2025-09-11 at 14.39.06.jpeg" alt="برنامج القيادة الشابة لتنمية مهارات القيادة لدى الشباب">
+                    </div>
+                    <div class="activity-content">
+                       <h3>برنامج القيادة الشابة</h3>
+                        <p>برنامج متخصص لتنمية مهارات القيادة والعمل الجماعي لدى الشباب من خلال ورش عمل وأنشطة عملية.</p>
+                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-modal="activity2">
+                    <div class="activity-img">
+                        <img src="istockphoto-2166408617-612x612.jpg" alt="مبادرة الابتكار المجتمعي لدعم مشاريع الشباب الابتكارية">
+                    </div>
+                    <div class="activity-content">
+                        <h3>  البرمجة</h3>
+                        <p>تعلم البرمجة يمنحك القدرة على تصميم وبرمجة التطبيقات والمواقع والألعاب، ويفتح لك آفاقًا واسعة للإبداع وحل المشكلات التقنية.</p>
+                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-modal="activity3">
+                    <div class="activity-img">
+                        <img src=",,,,,,,.jpg" alt="معسكرات التطوع لخدمة المجتمع وتنمية روح العمل التطوعي">
+                    </div>
+                    <div class="activity-content">
+                        <h3>معسكرات التطوع</h3>
+                         <p>الشبكات هي الأساس الذي يربط الأجهزة ببعضها ويتيح تبادل المعلومات بطريقة آمنة وفعّالة، مما يمكّنك من إدارة البنية التحتية الرقمية للمؤسسات.
+</p>
+                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-modal="activity4">
+                    <div class="activity-img">
+                        <img src="lll.jpg" alt="منتدى الحوار الشبابي لمناقشة قضايا الشباب وطرح الحلول">
+                    </div>
+                    <div class="activity-content">
+                          <h3>  تكنولوجيا المعلومات والاتصالات</h3>
+                         <p>مجال تكنولوجيا المعلومات والاتصالات يغطي كل ما يتعلق باستخدام الحاسوب والبرمجيات والتقنيات الرقمية لتسهيل التواصل وإدارة البيانات بفعالية.
+</p>
+                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-modal="activity5">
+                    <div class="activity-img">
+                        <img src=".....jpg" alt="بطولة الرياضة الشبابية لتعزيز الروح الرياضية والمنافسة الشريفة">
+                    </div>
+                    <div class="activity-content">
+                        <h3>  المهارات الشخصية</h3>
+                       <p>المهارات الشخصية هي مجموعة القدرات غير التقنية مثل التواصل، القيادة، التفكير النقدي، والعمل الجماعي، التي تساعدك على النجاح في بيئة العمل والحياة اليومية.
+</p>
+                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
+                <div class="activity-card" data-modal="activity6">
+                    <div class="activity-img">
+                        <img src="حححح.jpg" alt="مهرجان الفنون والثقافة لإبراز مواهب الشباب في مختلف المجالات الفنية">
+                    </div>
+                    <div class="activity-content">
+                       <h3>  ريادة الاعمال</h3>
+                        <p>ريادة الأعمال هي القدرة على ابتكار أفكار جديدة وتحويلها إلى مشاريع ناجحة، مع تطوير مهارات القيادة واتخاذ القرار وتحمل المخاطر لتحقيق النمو والاستدامة.
+</p>
+                        <a href="#" class="read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>معرض أنشطتنا</h2>
+                <p>لحظات مميزة من فعاليات وأنشطة الكيان</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <img src="WhatsApp Image 2025-09-12 at 15.06.49.jpeg" alt="نشاط تدريبي لشباب الكيان في قاعة المؤتمرات">
+                <img src="WhatsApp Image 2025-09-12 at 15.06.49 (2).jpeg" alt="ورشة عمل حول مهارات القيادة والإدارة">
+                <img src="WhatsApp Image 2025-09-12 at 15.06.49 (1).jpeg" alt="حفل تكريم المتميزين في أنشطة الكيان">
+                <img src="WhatsApp Image 2025-09-11 at 14.36.35.jpeg" alt="معسكر تدريبي لتنمية المهارات الشخصية">
+                <img src="WhatsApp Image 2025-09-11 at 14.39.06.jpeg" alt="حفل تكريم المتميزين في أنشطة الكيان">
+                <img src="WhatsApp Image 2025-09-11 at 14.43.42.jpeg" alt="معسكر تدريبي لتنمية المهارات الشخصية">
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Section -->
+    <section id="ai" class="ai-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>الذكاء الاصطناعي</h2>
+                <p>استخدام التقنيات الحديثة لخدمة شباب مصر</p>
+            </div>
+            
+            <div class="vm-container">
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    
+                    <a href="ai.html"><h3>منصة الذكاء الاصطناعي</h3></a>
+                    <p>منصة رقمية تستخدم تقنيات الذكاء الاصطناعي لتوجيه الشباب نحو البرامج والأنشطة المناسبة لمهاراتهم واهتماماتهم.</p>
+                </div>
+                
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>تحليل البيانات</h3>
+                    <a href="ai.html"><h3>منصة الذكاء الاصطناعي</h3></a>
+                    <p>نقوم بتحليل بيانات الشباب لتطوير برامج وأنشطة تلبي احتياجاتهم الحقيقية وتواكب متطلبات سوق العمل.</p>
+                </div>
+                
+                <div class="vm-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>التعلم الذكي</h3>
+                    <a href="ai.html"><h3>منصة الذكاء الاصطناعي</h3></a>
+                    <p>نوفر منصات تعلم ذكية تتكيف مع مستوى كل شاب وتقدم محتوى تعليميًا مخصصًا حسب قدراته واحتياجاته.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Support Section -->
+    
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>اتصل بنا</h2>
+                <p>يسعدنا تواصلكم معنا لأي استفسارات أو مقترحات</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>العنوان</h4>
+                            <p>مركز شباب الانفوشي بالاسكندرية</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>هاتف</h4>
+                            <p>+202 23456789</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>بريد إلكتروني</h4>
+                            <p>info@egyouth.org</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">الاسم بالكامل</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">الموضوع</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">الرسالة</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+      <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <img src="WhatsApp Image 2025-09-06 at 00.14.35.png" alt="شعار منظمة شباب مصر">
+                    <p>منظمة شباب مصر التابعة لوزارة الشباب والرياضة، نعمل معًا لبناء مستقبل أفضل لشباب مصر.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61552694205226"><i class="fab fa-facebook-f"></i></a>
+                         <a href="https://www.linkedin.com/company/%D8%B3%D9%88%D8%A7%D8%B9%D8%AF-%D8%B4%D8%A8%D8%A7%D8%A8-%D9%85%D8%B5%D8%B1/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                       
+                       
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">عن المنظمة</a></li>
+                        <li><a href="#activities">الأنشطة</a></li>
+                        <li><a href="#ai">الذكاء الاصطناعي</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>روابط هامة</h3>
+                    <ul>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3> برعاية</h3>
+                    <p>كيان سواعد شباب مصر هو برنامج وطني تابع لوزارة الشباب والرياضة، يهدف إلى تمكين الشباب ودعم قدراتهم في مختلف المجالات الاجتماعية والتعليمية والريادية</p>
+                      <div class="footer-logo">
+                          <img src="download.png" alt="شعار منظمة شباب مصر">
+                      </div>
+
+    <script>
+        // Toggle side menu
+        function toggleMenu() {
+            document.getElementById("sideMenu").classList.toggle("active");
+        }
+        
+        // Toggle submenus
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id);
+            const title = document.querySelector(`[onclick="toggleSubmenu('${id}')"]`);
+            
+            submenu.classList.toggle("active");
+            title.classList.toggle("active");
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const sideMenu = document.getElementById('sideMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (sideMenu.classList.contains('active') && 
+                !sideMenu.contains(event.target) && 
+                !menuBtn.contains(event.target)) {
+                toggleMenu();
+            }
+        });
+        
+        // Add animations on scroll
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.vm-card, .activity-card, .province-card');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (position < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Initialize elements for scroll animation
+        document.querySelectorAll('.vm-card, .activity-card, .province-card').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+    </script>
+</body>
+</html>
