@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>فريق القيادة - سواعد شباب مصر</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/phosphor.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200..900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --red-main: #E63946;
+            --gold-accent: #FFD166;
+            --dark-bg: #0f0f0f;
+            --dark-bg-alt: #070707;
+            --light-text: #F8F9FA;
+            --muted-text: #B0B0B0;
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg), var(--dark-bg-alt));
+            color: var(--light-text);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Navigation Bar transition on scroll */
+        .nav-scrolled {
+            background-color: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px);
+        }
+        .card {
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+            border-radius: 1rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 2rem;
+            text-align: center;
+            cursor: default;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8), 0 0 20px var(--red-main);
+        }
+        .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 9999px;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--gold-accent);
+            box-shadow: 0 0 15px var(--gold-accent);
+            transition: transform 0.3s ease;
+        }
+        .card img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--red-main);
+        }
+        h1, h2 {
+            color: var(--gold-accent);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+        h1 {
+            font-size: 2.75rem;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .role {
+            font-weight: 600;
+            color: var(--red-main);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .name {
+            font-size: 1.4rem;
+            color: var(--gold-accent);
+            margin-bottom: 0.75rem;
+        }
+        .bio {
+            color: var(--muted-text);
+            font-size: 1rem;
+            line-height: 1.5;
+            min-height: 3.5rem;
+        }
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding: 0 1rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+        /* Section heading and underline animation */
+        .section-heading-container::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red-main), var(--gold-accent));
+            margin-top: 10px;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .section-heading-container:hover::after {
+            transform: scaleX(1);
+        }
+        /* Animation for hero text */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-hero-text {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .card img {
+                width: 100px;
+                height: 100px;
+            }
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 px-8" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white tracking-wide">
+                سواعد <span class="text-[var(--red-main)]">شباب مصر</span>
+            </a>
+            <div class="hidden md:flex space-x-8 space-x-reverse">
+                <a href="index.html" class="nav-link text-white font-medium hover:text-[var(--gold-accent)] transition-colors duration-300">الرئيسية</a>
+                <a href="index.html" class="nav-link text-white font-medium hover:text-[var(--gold-accent)] transition-colors duration-300">التعريف</a>
+                <a href="course.html" class="nav-link text-white font-medium hover:text-[var(--gold-accent)] transition-colors duration-300">كورسات</a>
+            </div>
+            <!-- Hamburger menu for mobile -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-90 backdrop-blur-md mt-4 rounded-xl shadow-lg p-4">
+             <a href="index.html" class="nav-link text-white font-medium hover:text-[var(--gold-accent)] transition-colors duration-300">الرئيسية</a>
+                <a href="index.html" class="nav-link text-white font-medium hover:text-[var(--gold-accent)] transition-colors duration-300">التعريف</a>
+                <a href="course.html" class="nav-link text-white font-medium hover:text-[var(--gold-accent)] transition-colors duration-300">كورسات</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-4 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold animate-hero-text">
+            مجلس إدارة - كيان سواعد شباب مصر
+        </h1>
+        <p class="text-xl md:text-2xl text-[var(--muted-text)] mt-4 max-w-3xl mx-auto">
+            نخبة من القادة الشباب الذين يقودون مسيرة التغيير والإبداع في مجتمعنا
+        </p>
+    </section>
+
+    <!-- President Section -->
+    <section class="section" aria-label="قسم الرئيس">
+        <div class="section-heading-container mx-auto inline-block">
+            <h2>الرئيس</h2>
+        </div>
+        <div class="card max-w-lg mx-auto" role="region" aria-labelledby="president-name">
+            <img src="kareem.jpeg" alt="صورة الرئيس أ. كريم السيسي يرتدي بدلة رسمية مع خلفية احترافية" />
+            <div class="role">مؤسس و رئيس الكيان</div>
+            <div id="president-name" class="name">أ. كريم السيسي</div>
+            <p class="bio">قائد ذو رؤية استراتيجية ملهمة، يتمتع بخبرة واسعة في قيادة المشاريع الشبابية والتنموية. يقود الكيان برؤية طموحة لبناء مستقبل أفضل للشباب المصري.</p>
+        </div>
+    </section>
+
+    <!-- Vice Presidents Section -->
+    <section class="section" aria-label="قسم نواب الرئيس">
+        <div class="section-heading-container mx-auto inline-block">
+            <h2>نواب الرئيس</h2>
+        </div>
+        <div class="grid-2">
+            <div class="card" role="region" aria-labelledby="vp1-name">
+                <img src="image copy 2.png" alt="صورة نائب الرئيس أ. إسلام إبراهيم برؤية قيادية وملامح واثقة" />
+                <div class="role">نائب الرئيس </div>
+                <div id="vp1-name" class="name">أ. إسلام إبراهيم</div>
+                <p class="bio">خبير في الإدارة الاستراتيجية والتخطيط، يقود فريق العمل بتفانٍ وإخلاص.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="vp2-name">
+                <img src=" image (2).png" alt="صورة نائبة الرئيس أ. آية مصطفى بمظهر احترافي وابتسامة واثقة" />
+                <div class="role">نائب الرئيس  </div>
+                <div id="vp2-name" class="name">أ. آية مصطفى</div>
+                <p class="bio">محترفة في التخطيط الاستراتيجي وتنمية الموارد، تمتلك رؤية واضحة لتطوير أعمال الكيان.</p>
+            </div>
+              <div class="card" role="region" aria-labelledby="vp2-name">
+                <img src="image (3).png" alt="صورة نائبة الرئيس أ. آية مصطفى بمظهر احترافي وابتسامة واثقة" />
+                <div class="role">رئيس قطاع شرق الدلتا  </div>
+                <div id="vp2-name" class="name">أ. ولاء القشلان  </div>
+                <p class="bio">محترفة في التخطيط الاستراتيجي وتنمية الموارد، تمتلك رؤية واضحة لتطوير أعمال الكيان.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coordinators Section -->
+    <section class="section" aria-label="قسم منسقي المحافظات">
+        <div class="section-heading-container mx-auto inline-block">
+            <h2>منسقو المحافظات</h2>
+        </div>
+        <div class="grid-3">
+            <div class="card" role="region" aria-labelledby="cairo-name">
+                <img src="WhatsApp Image 2025-09-16 at 11.55.47.jpeg" alt="صورة منسقة القاهرة أ. آلاء السيد بكر بمظهر قيادي وملامح حازمة" />
+                <div class="role">منسق محافظة القاهرة</div>
+                <div id="cairo-name" class="name">أ. آلاء السيد بكر</div>
+                <p class="bio">ناشطة شبابية مميزة، تمتلك مهارات تنظيمية وقدرة على قيادة المبادرات الشبابية في القاهرة.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="alex-name">
+                <img src=" image (2).png" alt="صورة منسق الإسكندرية أ. كريم السيبي بمظهر شبابي وملامح مبتسمة" />
+                <div class="role">منسق محافظة الإسكندرية</div>
+                <div id="alex-name" class="name">أ. آية مصطفى </div>
+                <p class="bio">قائد ميداني نشط، يعمل على تنمية مهارات الشباب في الإسكندرية.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="giza-name">
+                <img src="WhatsApp Image 2025-09-16 at 11.58.55.jpeg" alt="صورة منسق الجيزة أ. محمد دياب بمظهر احترافي وملامح جادة" />
+                <div class="role">منسق محافظة الجيزة</div>
+                <div id="giza-name" class="name">أ. محمد دياب</div>
+                <p class="bio">ملتزم بتطوير البرامج الشبابية في الجيزة وتحفيز المشاركة المجتمعية.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="dakahlia-name">
+                <img src="WhatsApp Image 2025-09-16 at 12.06.39.jpeg" alt="صورة منسقة الدقهلية أ. أميرة عبد العاطي بمظهر لطيف وملامح ودودة" />
+                <div class="role">منسق محافظة القليوبية</div>
+                <div id="dakahlia-name" class="name">أ. حسام ناصر  </div>
+                <p class="bio">تعمل على تعزيز دور الشباب في الدقهلية من خلال مبادرات تنموية.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="portsaid-name">
+                <img src="هنا.jpeg" alt="صورة منسقة بورسعيد أ. هنا زاد بمظهر شاب طموح وملامح متفائلة" />
+                <div class="role">منسق محافظة بورسعيد</div>
+                <div id="portsaid-name" class="name">أ. هنا زرد</div>
+                <p class="bio">شابة طموحة تقود أنشطة الكيان في بورسعيد بنجاح.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="sharqia-name">
+                <img src="WhatsApp Image 2025-09-16 at 11.16.13.jpeg" alt="صورة منسقة الشرقية أ. رحمة سيف بمظهر قيادي وملامح ثابتة" />
+                <div class="role">منسق محافظة الشرقية</div>
+                <div id="sharqia-name" class="name">أ. رحمة سيف</div>
+                <p class="bio">تنشط في تنسيق فعاليات الشباب في الشرقية وتطوير مهاراتهم.</p>
+            </div>
+            <div class="card" role="region" aria-labelledby="monufia-name">
+                <img src="image (3).png" alt="صورة منسقة المنوفية أ. ولاء القشان بمظهر احترافي وملامح هادئة" />
+                <div class="role">منسق محافظة المنوفية</div>
+                <div id="monufia-name" class="name">أ. ولاء القشلان </div>
+                <p class="bio">تعمل على بناء قدرات الشباب في المنوفية من خلال برامج متنوعة.</p>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Footer -->
+    <footer class="text-center py-10 text-[var(--muted-text)] mt-12" id="contact">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-xl font-bold text-[var(--gold-accent)] mb-4">تواصل معنا</h3>
+            <p class="mb-2">البريد الإلكتروني: sawaeed2050@gmail.com</p>
+            <p>© 2024 سواعد شباب مصر. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="fixed bottom-6 right-6 bg-[var(--red-main)] text-white p-3 rounded-full shadow-lg hover:bg-[var(--gold-accent)] hover:text-black transition-all duration-300 transform hover:scale-110 z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </a>
+
+    <script>
+        // Smooth scroll for all links with a hash
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll behavior
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
